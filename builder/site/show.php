@@ -8,8 +8,8 @@ setSubTheme(VARSubthemeGo);
 variables([
 	VARMediakit => '?palette=1',
 	VARNode => SITEHOME,
-	'name' => substr(DAWN_SECTION . SITESATNAME, 1),
-	VARFooterMessage => 'Proud Member of "' . DAWN_NAME . VARQUOTE,
+	'name' => substr(NETWORKNAME . SITELISTNAME, 1),
+	VARFooterMessage => 'Proud Member of "' . NETWORKABBR . VARQUOTE,
 
 	VARChatraID => VARUseAmadeusWeb,
 	VARGoogleAnalytics => VARUseAmadeusWeb,

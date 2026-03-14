@@ -155,13 +155,6 @@ DEFINE('URLOFPREFIX', 'urlOf-');
 
 DEFINE('SITEROOT', 'root');
 DEFINE('SITESPRING', 'spring');
-DEFINE('SITESMITHY', 'smithy');
-DEFINE('SITEWORLD', 'oases');
-DEFINE('SITEWORLDOLD', 'world'); //shim
-DEFINE('SITEWORK', 'work');
-
-DEFINE('SITEIMRAN', 'imran');
-DEFINE('SITEZVM', 'zvmworld');
 
 global $networkUrls;
 $networkUrls = [];

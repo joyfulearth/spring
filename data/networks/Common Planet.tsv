@@ -2,14 +2,14 @@
 |key used for urlOf-
 
 ~Common Planet
-home	common-planet/home
-team	common-planet/team
-partners	common-planet/partners
+home	sites/common-planet/home
+team	sites/common-planet/team
+partners	sites/common-planet/partners
 
 ~Common Planet Authors
-remzi	common-planet/remzi
-adelina	common-planet/adelina
-|cpimran	people/imran/anbooda-indee
+remzi	sites/common-planet/remzi
+adelina	sites/common-planet/adelina
+|cpimran	imran
 
 ~Common Planet Projects
-creditism	common-planet/creditism
+creditism	sites/common-planet/creditism

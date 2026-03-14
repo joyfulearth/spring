@@ -50,7 +50,7 @@ function wants_only_content($ctaCheck = true) {
 DEFINE('CDNAUTO', 'auto');
 DEFINE('CDNLIVESUBDOMAIN', 'cdn.');
 function setup_cdn($fol = CDNAUTO, $local = true, $live = true) {
-	$cdn = 'https://cdn.amadeusweb.world/';
+	$cdn = 'https://cdn.joyfulearth.org/';
 	if ($fol == CDNAUTO) $fol = pathinfo(SITEPATH, PATHINFO_FILENAME) . '/';
 	if (is_local()) {
 		if ($local === false) return;
@@ -198,6 +198,22 @@ function autoSetNode($level, $where, $overrides = []) {
 	}
 
 	variable('NodeVarsAt' . $level, $vars);
+}
+
+function autosetPageMenu() {
+	$section = sectionValue();
+	$node = nodeValue();
+	if (!$section) return;
+	if ($section == $node) return;
+
+	DEFINE('NODEPATH', SITEPATH . '/' . sectionValue() . '/' . $node);
+	variables([
+		VARNodeSiteName => humanizeThis(),
+		VARNodeSafeName => $node,
+		VARSubmenuAtNode => true,
+		VARNodesHaveFiles => true,
+		VARDontOverwriteLogo => $section == 'ideas',
+	]);
 }
 
 function lastNodeVarsIndex() {

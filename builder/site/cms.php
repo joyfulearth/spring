@@ -190,6 +190,7 @@ variable('specialHumanizeReplaces', [
 	'aop' => 'AO Projects',
 	'whois' => 'Who Is',
 	'whoami' => 'Who Am I',
+	'wiseowls' => 'WiseOwls',
 	'2025 02' => 'Feb 2025',
 	'2025 04' => 'Apr 2025',
 	'2025 05' => 'May 2025',

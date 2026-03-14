@@ -2,16 +2,15 @@
 /**
  * This php framework is Proprietary, Source-available software!
  * It is licensed for distribution at the sole discretion of it's owner Imran.
- * Copyright Oct 2019 -> 2026, AmadeusWeb.world, All Rights Reserved!
- *     
- * Author:    Imran Ali Namazi <imran@amadeusweb.world>
- * Architect: https://amadeusweb.world/imran/
- * Website:   https://amadeusweb.world/spring/
+ * Copyright Oct 2019 -> 2026, JoyfulEarth.org, All Rights Reserved! *     
+ * Author:    Imran Ali Namazi <imran@joyfulearth.org>
+ * Architect: https://joyfulearth.org/imran/
+ * Website:   https://joyfulearth.org/spring/
  * Source:    https://github.com/amadeus-web-world/spring
  * License:   https://github.com/amadeus-web-world/spring#License-1-ov-file
  * Note: AmadeusWeb Spring v9.3 is based on 25 years of Imran's programming experience:
  * You MUST agree to the "proprietary" nature and Imran's PULL PLUG RIGHTS
- * Rights:    https://amadeusweb.world/oases/proprietariness/with-ai/2025-12--16th-chat/
+ * Rights:    https://joyfulearth.org/oases/proprietariness/with-ai/2025-12--16th-chat/
  */
 
 DEFINE('AMADEUSROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);
@@ -121,14 +120,18 @@ function before_bootstrap() {
 	variable(VARLocal, $local = startsWith($_SERVER['HTTP_HOST'], 'localhost'));
 	variable(VARLive, defined('SHOWSITESAT') ? false : contains(SITEPATH, VARLive));
 
-	variable('app', $url = ($local && !$isMobile ? replaceVariables('http://localhost%port%/spring/', 'port') : '//amadeusweb.world/spring/'));
+	$liveUrl = 'https:' . ($liveUrlPS = '//joyfulearth.org/');
+	$localUrl = replaceVariables('http://localhost%port%/', 'port');
 
-	if (DEFINED('AMADEUSURL')) variable('app', AMADEUSURL);
+	variable('app', $url = ($local && !$isMobile ? $localUrl : $liveUrlPS));
 
-	variable('app-themes', $url . 'themes/');
+	addNetworkUrl(SITEROOT, $root = $local ? $localUrl : $liveUrl);
+	addNetworkUrl(SITESPRING, $spring = $root . 'spring/');
+	//NOTE: no more self hosted
+	variable('app-themes', $spring . 'themes/');
 
 	variable(assetKey(COREASSETS, ASSETFOLDER), AMADEUSROOT . 'assets/');
-	variable(assetKey(COREASSETS), variable('app') . 'assets/');
+	variable(assetKey(COREASSETS), $spring . 'assets/');
 
 	$php = contains($_SERVER['DOCUMENT_ROOT'], 'magique') || contains($_SERVER['DOCUMENT_ROOT'], 'Magique');
 	variable('is-mobile', $isMobile || $php);
@@ -321,11 +324,10 @@ function _copyright($return = false) {
 
 function _credits($pre = '', $return = false) {
 	$root = getSiteUrl(SITEROOT);
-	$work = getSiteUrl(SITEWORK);
 	$utm = '?utm_content=site-credits&utm_referrer=' . variable(VARSafeName);
 
-	$url = $work . 'opus/' . $utm;
-	$img = '<img src="' . $root . 'amadeusweb-work-logo.png" height="40" alt="' . DAWN_NAME . '" class="m-2 align-middle rounded-2">';
+	$url = $root . 'opus/' . $utm;
+	$img = '<img src="' . $root . 'amadeusweb-work-logo.png" height="40" alt="JoyfulEarth.org" class="m-2 align-middle rounded-2">';
 
 	$result = $pre . 'Powered by' . getLink($img, $url, 'd-inline-block', true) . NEWLINE
 		. returnLine('[Request a Service](%work-signup%' . $utm . 'BTNPRIMARY)');

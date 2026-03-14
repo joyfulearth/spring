@@ -60,7 +60,7 @@ function subsitesMenu() {
 	$home = variable('subsiteHome');
 	if (!$home) return;
 
-	__flatMenu($items, humanize($home['name']));
+	flatMenu($items, humanize($home['name']));
 }
 
 function _siteOf($item, $items, $wrap, $anchorClass) {

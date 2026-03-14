@@ -347,3 +347,32 @@ function menu($folderRelative = false, $settings = []) {
 	if ($return) return $result;
 	echo $result;
 }
+
+function flatMenu($items, $name) {
+	setMenuSettings(); //undo page-menu stuff
+	extract(variable('menu-settings'));
+
+	if ($wrapTextInADiv) $name = '<div>' . $name . '++' . $topLevelAngle . '</div>';
+
+	echo '<li class="' . $itemClass . ' ' . $subMenuClass . '"><a class="' . $anchorClass . '">' . $name . '</a>' . NEWLINES2;
+	echo '	<ul class="' . $ulClass . '">' . NEWLINE;
+
+	$urlKey = _getUrlKeySansPreview();
+	
+	foreach ($items as $item) {
+		if ($item === null) continue;
+		if (is_string($item)) {
+			$name = substr($item, 1);
+			if ($wrapTextInADiv) $name = '<div class="' . $anchorClass . '">' . $name . $topLevelAngle . '</div>';
+			echo '		<li class="' . $itemClass . ' ' . $subMenuClass . ' menu-section">' . $name . '</li>' . NEWLINE;
+			continue;
+		}
+
+		$name = $item['name'];
+		if ($wrapTextInADiv) $name = '<div>' . $name . $topLevelAngle . '</div>';
+		echo '			<li class="' . $itemClass . ' ' . $subMenuClass . '">' . getLink($name, $item[$urlKey], $anchorClass, true) . '</li>' . NEWLINE;
+	}
+
+	echo '	</ul>' . NEWLINES2;
+	echo '</li>' . NEWLINE;
+}

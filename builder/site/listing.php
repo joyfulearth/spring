@@ -1,6 +1,6 @@
 <?php
 $sites = variable('networkSites');
-$prefix = substr(DAWN_SECTION, 1);
+$prefix = substr(NETWORKNAME, 1);
 
 sectionId('network-sites', 'container');
 
@@ -9,7 +9,6 @@ function _is_heading($item) { return is_string($item) && startsWith($item, '~');
 echo _excludeFromGoogleSearch(
 	contentBox('root-header', 'text-center mt-5', true)
 	. getSnippet('root-header', CORESNIPPET)
-	. implode(NEWLINE, dawn_menu_items())
 	. contentBox('end', '', true)
 );
 

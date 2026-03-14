@@ -187,8 +187,9 @@ function replaceHtml($html) {
 			'%address-url%' => variableOr('address-url', '#no-link'),
 
 			'%welcomeMessage%' => markdown(pipeToNL(variable(VARWelcomeMessage))), //links will get picked up
-			'%network-link%' => networkLink('btn btn-success', '<hr class="mt-5" />'),
-			'%networkName%' => DAWN_NAME,
+			//TODO:
+			//'%network-link%' => networkLink('btn btn-success', '<hr class="mt-5" />'),
+			//'%networkName%' => DAWN_NAME,
 			'%siteName%' => $sn = variable('name'),
 			'%siteName_subject%' => urlencode($sn),
 			'%byline%' =>  variable(VARByline),
@@ -196,9 +197,9 @@ function replaceHtml($html) {
 			'%section%' => sectionValue(),
 			'%section_r%' => humanizeThis(SECTIONVAR),
 
-			'%network-signup%' => getSiteUrl(SITEWORLD, VARCTAONLY),
-			'%network-helping%' => getSiteUrl(SITEZVM, 'helping/'),
-			'%work-signup%' => getSiteUrl(SITEWORK, 'signup/'),
+			'%network-signup%' => getSiteUrl(SITEROOT, VARCTAONLY),
+			'%network-helping%' => getSiteUrl(SITEROOT, 'helping/'),
+			'%work-signup%' => getSiteUrl(SITEROOT, 'signup/'),
 			'%gmail-reponses%' => 'https://mail.google.com/mail/u/0/?ogbl#advanced-search/subject=responds+on+website',
 			'%site-engage-btn%' => engageButton('Engage With Us', 'btn btn-lg btn-site'),
 
