@@ -34,7 +34,11 @@ function pageUrl($relative = '') {
 	$hasHash = contains($relative, '#');
 	if (!endsWith($relative, '/') && !$hasHash && !$hasQuerysting)
 		$relative .= '/';
-	return variable('page-url') . $relative;
+	return variable('page-url') . stripHomeFromUrl($relative);
+}
+
+function stripHomeFromUrl($slug) {
+	return str_replace('/home', '', $slug);
 }
 
 function scriptSafeUrl($url) {

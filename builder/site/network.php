@@ -103,7 +103,7 @@ function getSitesToShow($folSuffix) {
 			if (is_local()) debug(__FILE__, 'getSitesToShow', ['skipping' => $relativePath, 'TSV missing' => $file, 'hint' => 'IS NETWORK / Site Grouping?'], DEBUGVERBOSE);
 			continue;
 		}
-echo $relativePath . BRNL;
+
 		$item = _getOrWarn($relativePath);
 
 		$op[] = $item;

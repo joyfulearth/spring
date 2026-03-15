@@ -20,6 +20,7 @@ function renderNodeMenu() {
 		echo '<li class="' . $itemClass . '"><a href="' . pageUrl(variable(SAFENODEVAR)) . '" class="' . $anchorClass . '">' . getHtmlVariable('nodeName') . '</a>';
 
 	foreach ($files as $page) {
+		if ($page == 'home') continue;
 		//if (cannot_access($slug)) continue;
 		$page_r = humanize($page);
 		$page_r = $wrapTextInADiv ? '<div>' . $page_r . '</div>' : $page_r;
@@ -88,7 +89,7 @@ function renderBreadcrumbsMenu() {
 			'ul-class' => $ulClass . (false ? ' of-node node-' . $nodeSlug : ''),
 			'li-class' => $itemClass,
 			'a-class' => $anchorClass,
-			'link-to-home' => true,
+			'link-to-home' => variable('link-to-sub-node-home'),
 			'parent-slug-for-home-link' => $relativeFol,
 			'parent-slug' => $relativeFol,
 			'indent' => '			',

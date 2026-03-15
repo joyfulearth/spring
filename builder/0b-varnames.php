@@ -155,6 +155,7 @@ DEFINE('URLOFPREFIX', 'urlOf-');
 
 DEFINE('SITEROOT', 'root');
 DEFINE('SITESPRING', 'spring');
+DEFINE('SITEIMRAN', 'imran');
 
 global $networkUrls;
 $networkUrls = [];

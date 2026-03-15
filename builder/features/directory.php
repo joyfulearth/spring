@@ -81,7 +81,7 @@ function _renderMenu($home, $folder, $where) {
 	$lastName = false;
 	foreach ($nodes as $fol) {
 		$item = getFolderMeta($folder, $fol, '', $ix++);
-		if ($lastName == $item['name_urlized']) { $ix--; continue; }
+		if ($lastName == $item['name_urlized'] || $item['name_urlized'] == 'home') { $ix--; continue; }
 		$lastName = $item['name_urlized'];
 		if ($namesOfFiles && isset($namesOfFiles[$lastName]))
 			$item['name_humanized'] = $namesOfFiles[$lastName];

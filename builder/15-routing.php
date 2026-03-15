@@ -200,20 +200,13 @@ function autoSetNode($level, $where, $overrides = []) {
 	variable('NodeVarsAt' . $level, $vars);
 }
 
-function autosetPageMenu() {
+function autosetPageMenu($overrides = []) {
 	$section = sectionValue();
 	$node = nodeValue();
 	if (!$section) return;
-	if ($section == $node) return;
+	$suffix = $section == $node ? '' : '/' . $node;
 
-	DEFINE('NODEPATH', SITEPATH . '/' . sectionValue() . '/' . $node);
-	variables([
-		VARNodeSiteName => humanizeThis(),
-		VARNodeSafeName => $node,
-		VARSubmenuAtNode => true,
-		VARNodesHaveFiles => true,
-		VARDontOverwriteLogo => $section == 'ideas',
-	]);
+	autoSetNode(1, SITEPATH . '/' . sectionValue() . $suffix, $overrides);
 }
 
 function lastNodeVarsIndex() {
