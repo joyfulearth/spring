@@ -15,7 +15,7 @@ function read_seo($file, $inContent = false) {
 		$raw = $file;
 	}
 
-	if (false && !$meta) {
+	if (!$meta) {
 		//TODO: HI: code this
 		$altFile = relatedMetaFile($file);
 		if (!disk_file_exists($altFile)) return;

@@ -1,8 +1,8 @@
 ~Core
 spring
-imran
+s/imran
 ~Networks
-sites/commonplanet
+sites/common-planet
 ~Affiliates
 vidya/awakentolife
 vidya/vidyantara

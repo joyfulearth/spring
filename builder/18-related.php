@@ -6,7 +6,7 @@ function relatedDataFile($name) {
 }
 
 function relatedMetaFile($file) {
-	return pathinfo($file, PATHINFO_DIRNAME) . '/_/' . pathinfo($file, PATHINFO_FILENAME) . '/_meta.md';
+	return pathinfo($file, PATHINFO_DIRNAME) . '/' . pathinfo($file, PATHINFO_FILENAME) . '--meta==.md';
 }
 
 function printRelatedPages($file) {

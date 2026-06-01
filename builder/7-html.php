@@ -171,6 +171,8 @@ function replaceHtml($html) {
 			'%nodeItem_r%' => humanize($ni),
 			'%nodeItem2%' => $ni = getPageParameterAt(2, ''),
 			'%nodeItem2_r%' => humanize($ni),
+			'%nodeItem3%' => $ni = getPageParameterAt(3, ''),
+			'%nodeItem3_r%' => humanize($ni),
 			'%nodeFullUrl%' => pageUrl(variableOr('nodeSlug', '##no-nodeSlug')),
 			'%leafNodeAssets%' => variableOr(assetKey(LEAFNODEASSETS), ''),
 

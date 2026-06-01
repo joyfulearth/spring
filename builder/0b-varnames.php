@@ -69,7 +69,7 @@ function wants_md_in_parser($raw) { return contains($raw, '<!--markdown-when-pro
 DEFINE('VARCTAONLY', '?cta=1&content=1');
 
 //14-main.php
-DEFINE('VARSystemEmail', 'imran@amadeusweb.world');
+DEFINE('VARSystemEmail', 'imran@joyfulearth.org');
 DEFINE('VARSystemMobile', '+91-9841223313');
 DEFINE('VARSystemAddress', 'Chennai, India');
 function plus_email($email, $plusFolder) { return str_replace('@', '+' . $plusFolder . '@', $email); }

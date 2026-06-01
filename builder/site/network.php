@@ -23,32 +23,18 @@ if (!$noNetwork) {
 }
 
 function dawn_menu() {
-	$urlKey = _getUrlKeySansPreview();
-	$showIn = variable(DOMAINKEY);
-
-	$items = [
-		//$showIn && !$return ? makeLink('Back to ' . humanize($showIn), getSiteUrl(SITEROOT) : null,
-		makeLink(NETWORKNAME . ' Root', getSiteUrl(SITEROOT)),
-	];
-
-	$paths = textToList(disk_file_get_contents(NETWORKSDEFINEDAT . 'Webring.txt'));
-	$items[] = NETWORKNAME . 'Core';
-	foreach ($paths as $item)
-		$items[] = [$urlKey => getSiteUrl($item), 'name' => 'JE ' . humanize($item)];
-
-	//TODO: categories
-
+	$items = setupNetwork(false, getSheet(NETWORKSDEFINEDAT . 'Core.tsv', false));
 	flatMenu($items, NETWORKABBR);
 }
 
-function setupNetwork($noNetwork) {
+function setupNetwork($noNetwork, sheet | null $sheet = null) {
 	$networkSites = [];
 
 	$networkName = urldecode(getQueryParameter(VARNetwork, variable(VARNetwork)));
 
-	$urlKey = _getUrlKeySansPreview();
-
 	$items = [];
+	$urlKey = _getUrlKeySansPreview();
+	$returnArray = false;
 
 	if (defined('SHOWSITESAT')) {
 		define('SITELISTNAME', humanize($folPrefix = '/' . pathinfo(SHOWSITESAT, PATHINFO_FILENAME)));
@@ -68,6 +54,9 @@ function setupNetwork($noNetwork) {
 			}
 			$items[$file] = $file;
 		}
+	} else if ($sheet) {
+		$items = $sheet->rows;
+		$returnArray = true;
 	} else if (!$noNetwork && $networkName != 'dawn-only') {
 		if (disk_file_exists($txt = NETWORKSDEFINEDAT . $networkName . '.txt')) {
 			$items = textToList(disk_file_get_contents($txt));
@@ -77,6 +66,7 @@ function setupNetwork($noNetwork) {
 		}
 	}
 
+	$hasNode = isset($sheet) && $sheet->hasColumn('node');
 	foreach ($items as $key => $row) {
 		$plain = is_string($row);
 		$key = $plain ? $row : $sheet->getValue($row, 'key');
@@ -85,11 +75,17 @@ function setupNetwork($noNetwork) {
 			continue;
 		}
 
-		$item = _getOrWarn($plain ? $row : $sheet->getValue($row, 'path'));
+		$item = _getOrWarn($plain ? $row : $sheet->getValue($row, 'path'), $urlKey);
 		if ($item === false) continue;
+		if ($hasNode && $node = $sheet->getValue($row, 'node')) {
+			$item[$urlKey] .= $node . '/';
+			$item['key'] .= '/' . $key;
+			$item['name'] = humanize($node) . ' &larr; ' . $item['name'];
+		}
 		$networkSites[] = $item;
 	}
 
+	if ($returnArray) return $networkSites;
 	variable('networkSites', $networkSites);
 }
 

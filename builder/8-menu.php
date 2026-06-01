@@ -49,7 +49,7 @@ function _skipExcludedFiles($files, $excludeNames = 'home', $excludeExtensions =
 	$checkExtensions = count($excludeExtensions) > 0 && $excludeExtensions[0] != '';
 
 	foreach($files as $item) {
-		if ($item[0] == '.' OR $item[0] == '_')
+		if ($item[0] == '.' OR $item[0] == '_' OR endsWith($item, '=='))
 			continue;
 
 		if ($onlyFolders && contains($item, '.'))
@@ -276,7 +276,7 @@ function menu($folderRelative = false, $settings = []) {
 		if (!$filesGiven) {
 			if (in_array($file, $exclude)) continue;
 			$isNotValidFile = disk_is_dir($folder . $file) && !isset($bits[1]);
-			if ($file == 'index' || substr($file, 0, 1) == '_' || $last == $file) continue;
+			if ($file == 'index' || substr($file, 0, 1) == '_' ||  endsWith($file, '==') || $last == $file) continue;
 		}
 
 		if (isset($settings['visible']) && !$settings['visible']($file)) continue;

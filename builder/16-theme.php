@@ -208,9 +208,11 @@ function site_and_node_icons($siteIcon = null, $nodeIcon = null, $nodeSuffix = '
 	if (!$nodeIcon) $nodeIcon = getLogoOrIcon('icon', 'node' . $nodeSuffix); //todo - remove!
 
 	$breadcrumbs = [_iconLink($siteIcon)];
+	$nodeLink = '';
 	foreach (nodeVarsInUse() as $index) {
 		$vars = variable('NodeVarsAt' . $index);
-		$breadcrumbs[] = _iconLink(getLogoOrIcon('icon', $vars), $vars['nodeSlug']);
+		$breadcrumbs[] = _iconLink(getLogoOrIcon('icon', $vars), $nodeLink . $vars['nodeSlug']);
+		if (!nodeIs($vars['nodeSlug'])) $nodeLink = ($nodeLink ? $nodeLink . '/' : '') . $vars['nodeSlug'] . '/';
 	}
 
 	return implode(BREADCRUMBSEPARATOR . NEWLINE, $breadcrumbs);

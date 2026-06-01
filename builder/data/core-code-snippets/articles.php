@@ -11,19 +11,21 @@ $format = '<section class="p-3 col-md-4 col-sm-6 col-12%moreClasses%"><div class
 
 foreach ($sheet->rows as $item) {
 	$site = $sheet->hasColumn('site') ? $sheet->getValue($item, 'site') : '';
+	$section = $sheet->hasColumn('section') ? $sheet->getValue($item, 'section') : false;
+	$node = $sheet->hasColumn('node') ? $sheet->getValue($item, 'node') : false;
 	$path = $sheet->getValue($item, 'path');
 
 	$relPath = str_replace('/home', '', $path);
 	$url = replaceHtml(DEFINED('NETWORKPATH') && $site ? getSiteKey($site) : '%url%');
 
-	$link = $url . $relPath . '/';
+	$link = $url . ($node ? nodeValue() . '/' . $node . '/' : '') . $relPath . '/';
 
 	$base = $site && DEFINED('NETWORKPATH')
 		? NETWORKPATH . '/' . $site . '/'
-		: SITEPATH . '/';
+		: ($section ? SITEPATH . '/' : NODEPATH . '/');
 
 	$file = $base
-		. $sheet->getValue($item, 'section') . '/'
+		. ($section ? $section : $node) . '/'
 		. $path
 		. $sheet->getValue($item, 'extension');
 
