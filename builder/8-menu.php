@@ -376,3 +376,32 @@ function flatMenu($items, $name) {
 	echo '	</ul>' . NEWLINES2;
 	echo '</li>' . NEWLINE;
 }
+
+function twoLevelMenu($items, $topName) {
+	setMenuSettings(); //undo page-menu stuff
+	extract(variable('menu-settings'));
+
+	if ($wrapTextInADiv) $topName = '<div>' . $topName . '++' . $topLevelAngle . '</div>';
+
+	echo '<li class="' . $itemClass . ' ' . $subMenuClass . '"><a class="' . $anchorClass . '">' . $topName . '</a>' . NEWLINES2;
+	echo '	<ul class="' . $ulClass . '">' . NEWLINE;
+
+	$urlKey = _getUrlKeySansPreview();
+
+	foreach ($items as $name => $subItems) {
+		echo '<li class="' . $itemClass . ' ' . $subMenuClass . '"><a class="' . $anchorClass . '">' . $name . '</a>' . NEWLINE;
+		echo '	<ul class="' . $ulClass . '">' . NEWLINE;
+
+		foreach ($subItems as $item) {
+			$subName = $item['name'];
+			if ($wrapTextInADiv) $subName = '<div>' . $subName . $topLevelAngle . '</div>';
+			echo '			<li class="' . $itemClass . ' ' . $subMenuClass . '">' . getLink($subName, $item[$urlKey], $anchorClass, true) . '</li>' . NEWLINE;
+		}
+
+		echo '	</ul>' . NEWLINES2;
+		echo '</li>' . NEWLINE;
+	}
+
+	echo '	</ul>' . NEWLINES2;
+	echo '</li>' . NEWLINE;
+}

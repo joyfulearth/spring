@@ -2,15 +2,16 @@
 /**
  * This php framework is Proprietary, Source-available software!
  * It is licensed for distribution at the sole discretion of it's owner Imran.
- * Copyright Oct 2019 -> 2026, JoyfulEarth.org, All Rights Reserved! *     
+ * Copyright Oct 2019 -> 2026, JoyfulEarth.org, All Rights Reserved!
+ *     
  * Author:    Imran Ali Namazi <imran@joyfulearth.org>
- * Architect: https://joyfulearth.org/imran/
- * Website:   https://joyfulearth.org/spring/
- * Source:    https://github.com/amadeus-web-world/spring
- * License:   https://github.com/amadeus-web-world/spring#License-1-ov-file
- * Note: AmadeusWeb Spring v9.3 is based on 25 years of Imran's programming experience:
+ * Architect: https://imran.joyfulearth.org/
+ * Website:   https://spring.joyfulearth.org/
+ * Source:    https://github.com/joyfulearth/spring
+ * License:   https://github.com/joyfulearth/spring#License-1-ov-file
+ * Note: AmadeusWeb Spring v9.4 is based on 25 years of Imran's programming experience.
  * You MUST agree to the "proprietary" nature and Imran's PULL PLUG RIGHTS
- * Rights:    https://joyfulearth.org/oases/proprietariness/with-ai/2025-12--16th-chat/
+ * Rights:    https://spring.joyfulearth.org/dawn/proprietariness/with-ai/2025-12--16th-chat/
  */
 
 DEFINE('AMADEUSROOT', dirname(__DIR__) . DIRECTORY_SEPARATOR);
@@ -87,6 +88,9 @@ runFrameworkFile('18-related');
 runFrameworkFile('19-spring');
 runFrameworkFile('20-social-builder');
 
+//New in v9.4
+runFrameworkFile('21-site');
+
 class features {
 	const blurbs = 'blurbs';
 	const deck = 'deck';
@@ -118,16 +122,12 @@ function before_bootstrap() {
 	variable('port', $port != $testMobile ? ':' . $port : '');
 
 	variable(VARLocal, $local = startsWith($_SERVER['HTTP_HOST'], 'localhost'));
-	variable(VARLive, defined('SHOWSITESAT') ? false : contains(SITEPATH, VARLive));
 
-	$liveUrl = 'https:' . ($liveUrlPS = '//joyfulearth.org/');
-	$localUrl = replaceVariables('http://localhost%port%/', 'port');
+	variable('app', $spring = $local && !$isMobile ? getUrlFrom('spring') : getUrlFrom('spring', 'live-url'));
 
-	variable('app', $url = ($local && !$isMobile ? $localUrl : $liveUrlPS));
-
-	addNetworkUrl(SITEROOT, $root = $local ? $localUrl : $liveUrl);
-	addNetworkUrl(SITESPRING, $spring = $root . 'spring/');
-	//NOTE: no more self hosted
+	addNetworkUrl(SITEROOT, getUrlFrom('joyfulearth'));
+	addNetworkUrl(SITESPRING, getUrlFrom('spring'));
+	//NOTE: no more self hosted. //TODO: HI: allow
 	variable('app-themes', $spring . 'themes/');
 
 	variable(assetKey(COREASSETS, ASSETFOLDER), AMADEUSROOT . 'assets/');
@@ -145,8 +145,6 @@ function before_bootstrap() {
 
 if (!DEFINED('AMADEUSPRODUCT'))
 	before_bootstrap();
-
-if (defined('SHOWSITESAT')) return;
 
 //Now this only sets up the node and page parameters - rest moved to before_bootstrap()
 function bootstrap($config) {
@@ -323,14 +321,12 @@ function _copyright($return = false) {
 }
 
 function _credits($pre = '', $return = false) {
-	$root = getSiteUrl(SITEROOT);
 	$utm = '?utm_content=site-credits&utm_referrer=' . variable(VARSafeName);
 
-	$url = $root . 'opus/' . $utm;
-	$img = '<img src="' . $root . 'amadeusweb-work-logo.png" height="40" alt="JoyfulEarth.org" class="m-2 align-middle rounded-2">';
+	$img = '<img src="' . getSiteUrl(SITESPRING) . 'amadeusweb-work-logo.png" height="40" alt="AW Spring" class="m-2 align-middle rounded-2">';
 
-	$result = $pre . 'Powered by' . getLink($img, $url, 'd-inline-block', true) . NEWLINE
-		. returnLine('[Request a Service](%work-signup%' . $utm . 'BTNPRIMARY)');
+	$result = $pre . 'Powered by' . getLink($img, getSpecialUrl('root') . $utm, 'd-inline-block', true) . NEWLINE
+		. getLink('Request a Service', getSpecialUrl('signup') . $utm, bootstrapAndUX::button(bootstrapAndUX::primary));
 
 	if ($return) return $result; else echo $result;
 }

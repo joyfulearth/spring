@@ -144,6 +144,7 @@ DEFINE('VARDescription', 'description');
 DEFINE('VARWelcomeMessage', 'welcome-message');
 DEFINE('VARNoSearch', 'no-search');
 DEFINE('VARNetwork', 'network');
+DEFINE('VARDAWNMenu', 'dawn-menu');
 
 //site/header-menu.php
 DEFINE('VARLinkToNodeHome', 'link-to-node-home');
@@ -156,26 +157,8 @@ DEFINE('URLOFPREFIX', 'urlOf-');
 DEFINE('SITEROOT', 'root');
 DEFINE('SITESPRING', 'spring');
 DEFINE('SITEIMRAN', 'imran');
-
-global $networkUrls;
-$networkUrls = [];
-
-function addNetworkUrl($site, $url) {
-	global $networkUrls;
-	$networkUrls[URLOFPREFIX . $site] = $url;
-}
-
-function replaceNetworkUrls($html) {
-	global $networkUrls;
-	if (empty($networkUrls)) return $html; //assumes will be called again in render
-	if ($html === PleaseDie) showDebugging(22, $networkUrls, true);
-	if (!contains($html, URLOFPREFIX) || empty($networkUrls)) return $html;
-	//if (endsWith($html, '%')) showDebugging(23, [$html, $networkUrls], PleaseDie);
-	return replaceItems($html, $networkUrls, WRAPREPLACE);
-}
-
-function getSiteKey($site, $suffix = '') { return '%' . URLOFPREFIX . $site . '%' . $suffix; }
-function getSiteUrl($site, $suffix = '') { return replaceNetworkUrls(getSiteKey($site)) . $suffix; }
+DEFINE('NODEOPUS', 'opus');
+DEFINE('NODESMITHY', 'smithy');
 
 //site/node-menu.php
 DEFINE('VARNodesHaveFiles', 'nodes-have-files');

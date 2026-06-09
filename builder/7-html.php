@@ -203,9 +203,6 @@ function replaceHtml($html) {
 			'%section%' => sectionValue(),
 			'%section_r%' => humanizeThis(SECTIONVAR),
 
-			'%network-signup%' => getSiteUrl(SITEROOT, VARCTAONLY),
-			'%network-helping%' => getSiteUrl(SITEROOT, 'helping/'),
-			'%work-signup%' => getSiteUrl(SITEROOT, 'signup/'),
 			'%gmail-reponses%' => 'https://mail.google.com/mail/u/0/?ogbl#advanced-search/subject=responds+on+website',
 			'%site-engage-btn%' => engageButton('Engage With Us', 'btn btn-lg btn-site'),
 

@@ -1,8 +1,4 @@
 ~Core
+joyfulearth
 spring
-s/imran
-~Networks
-sites/common-planet
-~Affiliates
-vidya/awakentolife
-vidya/vidyantara
+federated/imran

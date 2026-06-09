@@ -77,6 +77,7 @@ function _visane($siteVars) {
 		[VARWelcomeMessage, 'Welcomes you!'],
 		[VARNoSearch, true], //TODO: GPSE - high
 		[VARNetwork, 'Webring'],
+		[VARDAWNMenu, true],
 	];
 
 	if (!hasVariable('theme')) {

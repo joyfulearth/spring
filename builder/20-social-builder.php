@@ -83,11 +83,11 @@ class socialBuilder {
 	}
 
 	function addSignup($class = 'fa fa-door-open bg-info') {
-		return $this->addExternal($class, getSiteUrl(SITEWORK, 'signup/'), 'AW Signup', false);
+		return $this->addExternal($class, getSpecialUrl('signup'), 'AW Signup', false);
 	}
 
 	function addSmithy($class = 'bi bi-tools bg-secondary') {
-		return $this->addExternal($class, getSiteUrl(SITESMITHY), 'AW Smithy', false);
+		return $this->addExternal($class, getSpecialUrl('smithy'), 'AW Smithy', false);
 	}
 
 	//#region begin
