@@ -321,12 +321,17 @@ function _copyright($return = false) {
 }
 
 function _credits($pre = '', $return = false) {
+	if (variable('dont_show_credits')) return '';
+
 	$utm = '?utm_content=site-credits&utm_referrer=' . variable(VARSafeName);
 
 	$img = '<img src="' . getSiteUrl(SITESPRING) . 'amadeusweb-work-logo.png" height="40" alt="AW Spring" class="m-2 align-middle rounded-2">';
 
-	$result = $pre . 'Powered by' . getLink($img, getSpecialUrl('root') . $utm, 'd-inline-block', true) . NEWLINE
-		. getLink('Request a Service', getSpecialUrl('signup') . $utm, bootstrapAndUX::button(bootstrapAndUX::primary));
+	$skipBranding = in_array(variable(VARDAWNMenu), BOOLLISTFALSE);
+
+	$result = $pre . 'Powered by' . getLink($img, getSpecialUrl('root') . $utm, 'd-inline-block', true) . NEWLINE;
+	if (!$skipBranding)
+		$result .= getLink('Request a Service', getSpecialUrl('signup') . $utm, bootstrapAndUX::button(bootstrapAndUX::primary));
 
 	if ($return) return $result; else echo $result;
 }
