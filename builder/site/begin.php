@@ -17,6 +17,9 @@ foreach ($sheet->rows as $row) {
 	$siteVars[$key] = $row[$cols['value']];
 }
 
+if (function_exists('enhanceAllSite'))
+	enhanceAllSite($siteVars);
+
 variables([
 	'site-vars' => $siteVars,
 	'local-url' => $siteVars['local-url'],

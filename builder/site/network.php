@@ -1,12 +1,12 @@
 <?php
-DEFINE('NETWORKDEFINEDAT', DEFINED('NETWORKPATH') ? NETWORKPATH . '/' : AMADEUSSITEROOT . 'data/networks/');
+DEFINE('NETWORKDEFINEDAT', DEFINED('NETWORKPATH') ? NETWORKPATH . '/' : AMADEUSSITEROOT . 'data/');
 DEFINE('NETWORKNAME', '~JoyfulEarth\'s ');
 DEFINE('NETWORKABBR', 'JE');
 
 setupNetwork();
 
 function network_menu() {
-	if (in_array(variable(VARDAWNMenu), BOOLLISTFALSE)) return;
+	if (variable(VARDAWNMenu) === 'no') return;
 
 	if (!in_array(variable(VARNetwork), BOOLLISTFALSE))
 		flatMenu(variable('networkSites'), variable(VARNetwork));
